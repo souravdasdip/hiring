@@ -12,16 +12,16 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
     CredentialsProvider({
-      name: "Admin Login",
+      name: "Account Login",
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) return null;
-        
+
         const user = await prisma.user.findUnique({ where: { email: credentials.email } });
-        
+
         if (!user || !user.password) {
           return null;
         }
@@ -33,7 +33,7 @@ export const authOptions: NextAuthOptions = {
         }
 
         if (user.role !== 'ADMIN') {
-           return null;
+          return null;
         }
 
         return { id: user.id, email: user.email, name: user.name, role: user.role };

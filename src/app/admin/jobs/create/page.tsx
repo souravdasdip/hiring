@@ -51,6 +51,12 @@ export default function CreateJobPage() {
               <input type="checkbox" id="isActive" name="isActive" defaultChecked className="h-4 w-4 text-indigo-600 rounded border-slate-300" />
               <label htmlFor="isActive" className="ml-2 text-sm font-medium text-slate-700 dark:text-slate-300">Is Active (Visible on site)</label>
             </div>
+
+            <div className="space-y-2 col-span-1 md:col-span-2">
+              <label htmlFor="applyUrl" className="text-sm font-medium">External Apply URL</label>
+              <input type="url" id="applyUrl" name="applyUrl" className="w-full px-3 py-2 border rounded-md dark:bg-slate-800 dark:border-slate-700" placeholder="https://external-site.com/apply/job-id (Leave blank for internal form)" />
+              <p className="text-xs text-slate-500">If provided, the Apply button will redirect to this link.</p>
+            </div>
           </div>
 
           <div className="space-y-2">

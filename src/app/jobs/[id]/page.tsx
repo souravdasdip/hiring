@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation"
 import prisma from "@/lib/prisma"
 import { Badge } from "@/components/ui/badge"
-import { ApplyForm } from "@/components/blocks/ApplyForm"
 
 export const revalidate = 60
 
@@ -35,11 +34,19 @@ export default async function JobPage(props: { params: Promise<{ id: string }> }
             </div>
             
             {job.requiredSkills && job.requiredSkills.length > 0 && (
-              <div className="mt-8 flex gap-4 flex-wrap items-center">
-                 <span className="font-semibold text-slate-900 dark:text-white">Required Skills:</span>
-                 {job.requiredSkills.map(skill => (
-                    <Badge key={skill} variant="outline" className="font-normal text-slate-600">{skill}</Badge>
-                 ))}
+              <div className="mt-6">
+                <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-3">Core Skills</h3>
+                <div className="flex gap-2 flex-wrap items-center">
+                   {job.requiredSkills.map(skill => (
+                      <Badge 
+                        key={skill} 
+                        variant="secondary" 
+                        className="px-3 py-1 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 text-blue-700 hover:shadow-sm hover:-translate-y-0.5 transition-all dark:from-blue-950/50 dark:to-indigo-950/50 dark:border-blue-900/50 dark:text-blue-300 rounded-full"
+                      >
+                        {skill}
+                      </Badge>
+                   ))}
+                </div>
               </div>
             )}
           </div>
@@ -89,8 +96,25 @@ export default async function JobPage(props: { params: Promise<{ id: string }> }
 
         {/* Sidebar / Application Form */}
         <div className="lg:col-span-1">
-          <div className="sticky top-12">
-            <ApplyForm jobId={job.id} />
+          <div className="sticky top-12 bg-slate-50 dark:bg-slate-900 rounded-xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800">
+            <h3 className="text-2xl font-bold mb-6">Interested in this role?</h3>
+            <p className="text-slate-600 dark:text-slate-400 mb-6">
+              Take the next step in your career. Apply now to join the team.
+            </p>
+            {job.applyUrl ? (
+              <a 
+                href={job.applyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-4 px-6 rounded-md transition-colors text-lg"
+              >
+                Apply Now &rarr;
+              </a>
+            ) : (
+              <div className="w-full text-center bg-slate-200 dark:bg-slate-800 text-slate-500 py-4 px-6 rounded-md">
+                Application closed
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -21,6 +21,9 @@ export async function createJob(formData: FormData) {
   const requiredSkills = processArrayFields(formData.get("requiredSkills") as string)
   const responsibilities = processArrayFields(formData.get("responsibilities") as string)
   const qualifications = processArrayFields(formData.get("qualifications") as string)
+  
+  let applyUrl: string | null = formData.get("applyUrl") as string
+  if (applyUrl && applyUrl.trim() === "") applyUrl = null;
 
   await prisma.job.create({
     data: {
@@ -34,7 +37,8 @@ export async function createJob(formData: FormData) {
       requiredSkills,
       responsibilities,
       qualifications,
-      isActive
+      isActive,
+      applyUrl
     }
   })
 
@@ -57,6 +61,9 @@ export async function updateJob(id: string, formData: FormData) {
   const responsibilities = processArrayFields(formData.get("responsibilities") as string)
   const qualifications = processArrayFields(formData.get("qualifications") as string)
 
+  let applyUrl: string | null = formData.get("applyUrl") as string
+  if (applyUrl && applyUrl.trim() === "") applyUrl = null;
+
   await prisma.job.update({
     where: { id },
     data: {
@@ -70,7 +77,8 @@ export async function updateJob(id: string, formData: FormData) {
       requiredSkills,
       responsibilities,
       qualifications,
-      isActive
+      isActive,
+      applyUrl
     }
   })
 
