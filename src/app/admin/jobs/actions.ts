@@ -13,7 +13,7 @@ export async function createJob(formData: FormData) {
   const department = formData.get("department") as string
   const salaryRange = formData.get("salaryRange") as string
   const aboutCompany = formData.get("aboutCompany") as string
-  const type = formData.get("type") as string
+  const type = formData.getAll("type").join(", ")
   const location = formData.get("location") as string
   const jobSummary = formData.get("jobSummary") as string
   const isActive = formData.get("isActive") === "on"
@@ -52,7 +52,7 @@ export async function updateJob(id: string, formData: FormData) {
   const department = formData.get("department") as string
   const salaryRange = formData.get("salaryRange") as string
   const aboutCompany = formData.get("aboutCompany") as string
-  const type = formData.get("type") as string
+  const type = formData.getAll("type").join(", ")
   const location = formData.get("location") as string
   const jobSummary = formData.get("jobSummary") as string
   const isActive = formData.get("isActive") === "on"

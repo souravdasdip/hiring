@@ -15,10 +15,10 @@ export function HeroSection() {
              </span>
           </div>
           <h1 className="text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-7xl mb-6">
-            Where <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-600">Marketing Careers</span> are Built.
+            Where <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-600">Career Opportunities</span> Begin
           </h1>
           <p className="mt-6 text-xl leading-8 text-slate-600 dark:text-slate-400">
-            We bring ideas to life by combining years of experience of our very talented team. Join us and shape the future of digital marketing.
+            Discover part-time and full-time job opportunities across the USA. Explore roles that match your skills, experience, and career goals, and take the next step toward your future.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Link href="/jobs">

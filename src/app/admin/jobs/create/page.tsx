@@ -23,13 +23,25 @@ export default function CreateJobPage() {
             </div>
             
             <div className="space-y-2">
-              <label htmlFor="type" className="text-sm font-medium">Job Type *</label>
-              <select id="type" name="type" required className="w-full px-3 py-2 border rounded-md dark:bg-slate-800 dark:border-slate-700">
-                <option value="Full-time">Full-time</option>
-                <option value="Part-time">Part-time</option>
-                <option value="Contract">Contract</option>
-                <option value="Internship">Internship</option>
-              </select>
+              <label className="text-sm font-medium">Job Type *</label>
+              <div className="flex flex-wrap gap-4 px-3 py-2 border rounded-md dark:bg-slate-800 dark:border-slate-700">
+                <label className="flex items-center gap-2">
+                  <input type="checkbox" name="type" value="Full-time" className="h-4 w-4 text-indigo-600 rounded border-slate-300" />
+                  <span className="text-sm">Full-time</span>
+                </label>
+                <label className="flex items-center gap-2">
+                  <input type="checkbox" name="type" value="Part-time" className="h-4 w-4 text-indigo-600 rounded border-slate-300" />
+                  <span className="text-sm">Part-time</span>
+                </label>
+                <label className="flex items-center gap-2">
+                  <input type="checkbox" name="type" value="Contract" className="h-4 w-4 text-indigo-600 rounded border-slate-300" />
+                  <span className="text-sm">Contract</span>
+                </label>
+                <label className="flex items-center gap-2">
+                  <input type="checkbox" name="type" value="Internship" className="h-4 w-4 text-indigo-600 rounded border-slate-300" />
+                  <span className="text-sm">Internship</span>
+                </label>
+              </div>
             </div>
 
             <div className="space-y-2">
