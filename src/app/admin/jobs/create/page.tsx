@@ -1,5 +1,6 @@
 import { createJob } from "../actions"
 import Link from "next/link"
+import { RichTextInput } from "@/components/ui/RichTextInput"
 
 export default function CreateJobPage() {
   return (
@@ -73,12 +74,12 @@ export default function CreateJobPage() {
 
           <div className="space-y-2">
             <label htmlFor="jobSummary" className="text-sm font-medium">Job Summary *</label>
-            <textarea id="jobSummary" name="jobSummary" required rows={4} className="w-full px-3 py-2 border rounded-md dark:bg-slate-800 dark:border-slate-700"></textarea>
+            <RichTextInput name="jobSummary" />
           </div>
           
           <div className="space-y-2">
             <label htmlFor="aboutCompany" className="text-sm font-medium">About Company</label>
-            <textarea id="aboutCompany" name="aboutCompany" rows={3} className="w-full px-3 py-2 border rounded-md dark:bg-slate-800 dark:border-slate-700"></textarea>
+            <RichTextInput name="aboutCompany" />
           </div>
 
           <div className="space-y-2">

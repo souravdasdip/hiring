@@ -2,6 +2,10 @@ import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import { Job } from "@prisma/client"
 
+function stripHtml(html: string): string {
+  return html.replace(/<[^>]*>?/gm, "").replace(/&nbsp;/g, " ").trim();
+}
+
 export function JobCard({ job }: { job: Job }) {
   return (
     <Link href={`/jobs/${job.id}`} className="block h-full group">
@@ -31,7 +35,7 @@ export function JobCard({ job }: { job: Job }) {
         
         <div className="flex-grow z-10">
           <p className="line-clamp-3 text-base text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
-            {job.jobSummary}
+            {stripHtml(job.jobSummary)}
           </p>
         </div>
 

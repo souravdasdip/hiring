@@ -2,6 +2,7 @@ import prisma from "@/lib/prisma"
 import { updateBlog } from "../actions"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { RichTextInput } from "@/components/ui/RichTextInput"
 
 export default async function EditBlogPage(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
@@ -55,7 +56,7 @@ export default async function EditBlogPage(props: { params: Promise<{ id: string
           
           <div className="space-y-2">
             <label htmlFor="content" className="text-sm font-medium">Content *</label>
-            <textarea id="content" name="content" defaultValue={blog.content} required rows={10} className="w-full px-3 py-2 border rounded-md dark:bg-slate-800 dark:border-slate-700 font-mono"></textarea>
+            <RichTextInput name="content" defaultValue={blog.content} />
           </div>
 
           <div className="space-y-2 flex items-center h-full pt-4">

@@ -1,5 +1,6 @@
 import { createBlog } from "../actions"
 import Link from "next/link"
+import { RichTextInput } from "@/components/ui/RichTextInput"
 
 export default function CreateBlogPage() {
   return (
@@ -40,8 +41,8 @@ export default function CreateBlogPage() {
           </div>
           
           <div className="space-y-2">
-            <label htmlFor="content" className="text-sm font-medium">Content * (Markdown/HTML supported if configured)</label>
-            <textarea id="content" name="content" required rows={10} className="w-full px-3 py-2 border rounded-md dark:bg-slate-800 dark:border-slate-700 font-mono"></textarea>
+            <label htmlFor="content" className="text-sm font-medium">Content *</label>
+            <RichTextInput name="content" />
           </div>
 
           <div className="space-y-2 flex items-center h-full pt-4">

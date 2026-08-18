@@ -1,6 +1,13 @@
 import prisma from "@/lib/prisma"
 import { BlogCard } from "@/components/blocks/BlogCard"
 
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Blog",
+  description: "Discover the latest insights, news, and tips from our team. Stay updated on our journey.",
+}
+
 export const revalidate = 60
 
 export default async function BlogsPage() {

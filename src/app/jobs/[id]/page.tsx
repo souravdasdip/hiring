@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation"
 import prisma from "@/lib/prisma"
 import { Badge } from "@/components/ui/badge"
+import { Metadata } from "next"
 
 export const revalidate = 60
 
@@ -10,6 +11,23 @@ export async function generateStaticParams() {
     return jobs.map((job) => ({ id: job.id }))
   } catch (e) {
     return []
+  }
+}
+
+export async function generateMetadata(props: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const params = await props.params;
+  const job = await prisma.job.findUnique({ where: { id: params.id } })
+
+  if (!job) {
+    return { title: "Job Not Found" }
+  }
+
+  // Remove HTML tags for clean description
+  const cleanSummary = job.jobSummary.replace(/<[^>]*>?/gm, '');
+
+  return {
+    title: job.title,
+    description: `${job.title} at our company. ${cleanSummary.substring(0, 150)}...`,
   }
 }
 
@@ -58,7 +76,7 @@ export default async function JobPage(props: { params: Promise<{ id: string }> }
             {job.aboutCompany && (
               <>
                 <h3>About Company</h3>
-                <p>{job.aboutCompany}</p>
+                <div dangerouslySetInnerHTML={{ __html: job.aboutCompany }} />
               </>
             )}
             
@@ -68,7 +86,7 @@ export default async function JobPage(props: { params: Promise<{ id: string }> }
             </div>
 
             <h3 className="mt-8">Job Summary</h3>
-            <p className="whitespace-pre-wrap">{job.jobSummary}</p>
+            <div dangerouslySetInnerHTML={{ __html: job.jobSummary }} />
 
             {job.responsibilities && job.responsibilities.length > 0 && (
               <>

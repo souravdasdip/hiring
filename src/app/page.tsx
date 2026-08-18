@@ -3,6 +3,13 @@ import { JobCard } from "@/components/blocks/JobCard"
 import { BlogCard } from "@/components/blocks/BlogCard"
 import prisma from "@/lib/prisma"
 
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Home",
+  description: "Find the best job opportunities matching your skills and experience.",
+}
+
 // ISR: revalidate this page every 60 seconds
 export const revalidate = 60;
 

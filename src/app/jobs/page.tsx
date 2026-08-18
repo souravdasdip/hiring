@@ -1,6 +1,13 @@
 import prisma from "@/lib/prisma"
 import { JobCard } from "@/components/blocks/JobCard"
 
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Careers",
+  description: "Join our team and help us build the future. Explore our open roles and find your perfect fit.",
+}
+
 export const revalidate = 60
 
 export default async function JobsPage() {

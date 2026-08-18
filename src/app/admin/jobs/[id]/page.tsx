@@ -2,6 +2,7 @@ import prisma from "@/lib/prisma"
 import { updateJob } from "../actions"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { RichTextInput } from "@/components/ui/RichTextInput"
 
 export default async function EditJobPage(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
@@ -87,12 +88,12 @@ export default async function EditJobPage(props: { params: Promise<{ id: string 
 
           <div className="space-y-2">
             <label htmlFor="jobSummary" className="text-sm font-medium">Job Summary *</label>
-            <textarea id="jobSummary" name="jobSummary" defaultValue={job.jobSummary} required rows={4} className="w-full px-3 py-2 border rounded-md dark:bg-slate-800 dark:border-slate-700"></textarea>
+            <RichTextInput name="jobSummary" defaultValue={job.jobSummary} />
           </div>
           
           <div className="space-y-2">
             <label htmlFor="aboutCompany" className="text-sm font-medium">About Company</label>
-            <textarea id="aboutCompany" name="aboutCompany" defaultValue={job.aboutCompany || ""} rows={3} className="w-full px-3 py-2 border rounded-md dark:bg-slate-800 dark:border-slate-700"></textarea>
+            <RichTextInput name="aboutCompany" defaultValue={job.aboutCompany || ""} />
           </div>
 
           <div className="space-y-2">
