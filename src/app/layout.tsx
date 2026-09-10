@@ -28,6 +28,7 @@ export const metadata: Metadata = {
 import "./globals.css";
 import { Footer } from "@/components/blocks/Footer";
 import { Header } from "@/components/blocks/Header";
+import { Providers } from "./providers";
 
 export default function RootLayout({
   children,
@@ -40,9 +41,11 @@ export default function RootLayout({
       className={`${outfit.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Header />
-        <main className="flex-grow flex flex-col">{children}</main>
-        <Footer />
+        <Providers>
+          <Header />
+          <main className="flex-grow flex flex-col">{children}</main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
