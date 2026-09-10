@@ -4,7 +4,24 @@ import { BlogCard } from "@/components/blocks/BlogCard"
 import prisma from "@/lib/prisma"
 
 import { Metadata } from "next"
-import { ArrowRight, Search, Briefcase, MapPin } from "lucide-react"
+import {
+  ArrowRight,
+  Search,
+  Briefcase,
+  MapPin,
+  Code,
+  Palette,
+  Megaphone,
+  Stethoscope,
+  BarChart3,
+  Globe,
+  Sparkles,
+  Send,
+  Award,
+  Clock,
+  CheckCircle2,
+  ChevronRight
+} from "lucide-react"
 import Link from "next/link"
 
 export const metadata: Metadata = {
@@ -40,66 +57,252 @@ export default async function Home() {
     <main className="min-h-screen bg-slate-50 dark:bg-slate-950">
       <HeroSection />
 
-      {/* How It Works */}
-      <section className="py-24 relative overflow-hidden bg-white dark:bg-slate-900">
-        <div className="absolute inset-0 dot-grid opacity-30 dark:opacity-10" />
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mb-16 text-center max-w-2xl mx-auto">
-            <p className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest mb-3">How It Works</p>
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-slate-900 dark:text-white">
-              Start Your Journey in 3 Simple Steps
-            </h2>
-            <p className="mt-4 text-lg text-slate-500 dark:text-slate-400">
-              From discovery to your first day — we make the process simple, fast, and effective.
-            </p>
+      {/* Next Section: Trust Metrics, Hiring Categories & 3-Step Flow */}
+      <section className="py-20 relative overflow-hidden bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800">
+        <div className="absolute inset-0 dot-grid opacity-25 dark:opacity-10" />
+        
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          
+          {/* 1. Live Platform Metrics Strip */}
+          <div className="mb-20 bg-slate-50/80 dark:bg-slate-950/60 rounded-3xl p-6 sm:p-8 border border-slate-200/70 dark:border-slate-800/80 shadow-sm">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+              {[
+                {
+                  value: "500+",
+                  label: "Active Roles",
+                  sub: "Updated this week",
+                  icon: Briefcase,
+                  color: "text-indigo-600 dark:text-indigo-400",
+                  bg: "bg-indigo-50 dark:bg-indigo-950/50",
+                },
+                {
+                  value: "50 States",
+                  label: "Nationwide Coverage",
+                  sub: "Remote & on-site",
+                  icon: Globe,
+                  color: "text-violet-600 dark:text-violet-400",
+                  bg: "bg-violet-50 dark:bg-violet-950/50",
+                },
+                {
+                  value: "48 Hours",
+                  label: "Avg. First Response",
+                  sub: "Direct hiring reviews",
+                  icon: Clock,
+                  color: "text-emerald-600 dark:text-emerald-400",
+                  bg: "bg-emerald-50 dark:bg-emerald-950/50",
+                },
+                {
+                  value: "98%",
+                  label: "Candidate Satisfaction",
+                  sub: "Verified employer ratings",
+                  icon: Award,
+                  color: "text-amber-600 dark:text-amber-400",
+                  bg: "bg-amber-50 dark:bg-amber-950/50",
+                },
+              ].map((stat) => {
+                const IconComponent = stat.icon;
+                return (
+                  <div key={stat.label} className="flex items-center gap-4">
+                    <div className={`w-12 h-12 rounded-2xl ${stat.bg} flex items-center justify-center shrink-0`}>
+                      <IconComponent className={`w-6 h-6 ${stat.color}`} />
+                    </div>
+                    <div>
+                      <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                        {stat.value}
+                      </div>
+                      <div className="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300">
+                        {stat.label}
+                      </div>
+                      <div className="text-[11px] text-slate-400 dark:text-slate-500">
+                        {stat.sub}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-            {/* Connector line (desktop only) */}
-            <div className="hidden md:block absolute top-12 left-1/4 right-1/4 h-px bg-gradient-to-r from-indigo-200 via-violet-200 to-indigo-200 dark:from-indigo-800 dark:via-violet-800 dark:to-indigo-800" />
-
-            {[
-              {
-                step: "01",
-                icon: "🔍",
-                title: "Browse Opportunities",
-                description: "Explore hundreds of part-time and full-time roles across every state. Filter by location, job type, and salary range.",
-                color: "from-indigo-500 to-indigo-600",
-                bg: "bg-indigo-50 dark:bg-indigo-900/20",
-              },
-              {
-                step: "02",
-                icon: "📝",
-                title: "Submit Application",
-                description: "Apply with your resume and LinkedIn profile in minutes. No lengthy registration required to get started.",
-                color: "from-violet-500 to-violet-600",
-                bg: "bg-violet-50 dark:bg-violet-900/20",
-                elevated: true,
-              },
-              {
-                step: "03",
-                icon: "🎯",
-                title: "Land the Role",
-                description: "Get contacted directly by hiring managers and take the next step toward the career you deserve.",
-                color: "from-cyan-500 to-cyan-600",
-                bg: "bg-cyan-50 dark:bg-cyan-900/20",
-              },
-            ].map(({ step, icon, title, description, color, bg, elevated }) => (
-              <div
-                key={step}
-                className={`relative bg-white dark:bg-slate-950 p-8 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all duration-300 group ${elevated ? "md:-translate-y-4 shadow-md shadow-slate-100 dark:shadow-none ring-1 ring-slate-100 dark:ring-slate-800" : ""}`}
-              >
-                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${color} flex items-center justify-center text-2xl mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                  {icon}
-                </div>
-                <div className="absolute top-6 right-6 text-5xl font-black text-slate-100 dark:text-slate-800 select-none leading-none">
-                  {step}
-                </div>
-                <h3 className="text-xl font-bold mb-3 text-slate-900 dark:text-white">{title}</h3>
-                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{description}</p>
+          {/* 2. Popular Hiring Categories */}
+          <div className="mb-24">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+              <div>
+                <p className="text-xs sm:text-sm font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest mb-2">
+                  Explore by Field
+                </p>
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                  High-Demand Job Categories
+                </h2>
+                <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400 mt-1">
+                  Discover openings across our fastest growing departments and specialties.
+                </p>
               </div>
-            ))}
+
+              <Link
+                href="/jobs"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors group"
+              >
+                View all categories
+                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {[
+                {
+                  title: "Technology & Engineering",
+                  roles: "140+ Openings",
+                  description: "Full Stack, Frontend, DevOps, Data & Cloud infrastructure roles.",
+                  icon: Code,
+                  color: "from-blue-500 to-indigo-600",
+                },
+                {
+                  title: "Product & UI/UX Design",
+                  roles: "65+ Openings",
+                  description: "Product Managers, Design Systems, UX Researchers, and Leads.",
+                  icon: Palette,
+                  color: "from-purple-500 to-violet-600",
+                },
+                {
+                  title: "Marketing & Growth",
+                  roles: "85+ Openings",
+                  description: "Brand Strategy, Performance Marketing, SEO, and Content.",
+                  icon: Megaphone,
+                  color: "from-pink-500 to-rose-600",
+                },
+                {
+                  title: "Healthcare & Clinical",
+                  roles: "95+ Openings",
+                  description: "Nursing, Clinical Operations, Health Tech, and Care Coordinators.",
+                  icon: Stethoscope,
+                  color: "from-emerald-500 to-teal-600",
+                },
+                {
+                  title: "Sales & Operations",
+                  roles: "70+ Openings",
+                  description: "Account Executives, Business Development, Operations & HR.",
+                  icon: BarChart3,
+                  color: "from-amber-500 to-orange-600",
+                },
+                {
+                  title: "100% Remote USA",
+                  roles: "110+ Openings",
+                  description: "Flexible, location-independent positions across all disciplines.",
+                  icon: Globe,
+                  color: "from-cyan-500 to-blue-600",
+                },
+              ].map((category) => {
+                const IconComponent = category.icon;
+                return (
+                  <Link
+                    key={category.title}
+                    href="/jobs"
+                    className="group relative p-6 rounded-2xl bg-slate-50/70 dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800 hover:border-indigo-300 dark:hover:border-indigo-700 hover:shadow-xl hover:shadow-indigo-500/5 transition-all duration-300 flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-4">
+                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${category.color} flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform duration-300`}>
+                          <IconComponent className="w-6 h-6" />
+                        </div>
+                        <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-200/70 dark:bg-slate-800 text-slate-700 dark:text-slate-300 group-hover:bg-indigo-50 group-hover:text-indigo-600 dark:group-hover:bg-indigo-950/60 dark:group-hover:text-indigo-300 transition-colors">
+                          {category.roles}
+                        </span>
+                      </div>
+                      <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                        {category.title}
+                      </h3>
+                      <p className="mt-2 text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                        {category.description}
+                      </p>
+                    </div>
+
+                    <div className="mt-4 pt-3 border-t border-slate-200/50 dark:border-slate-800/60 flex items-center gap-1 text-xs font-semibold text-indigo-600 dark:text-indigo-400">
+                      <span>Browse positions</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
+
+          {/* 3. Modernized 3-Step Candidate Journey */}
+          <div>
+            <div className="mb-14 text-center max-w-2xl mx-auto">
+              <p className="text-xs sm:text-sm font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest mb-2">
+                Candidate Process
+              </p>
+              <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl text-slate-900 dark:text-white">
+                Start Your Journey in 3 Simple Steps
+              </h2>
+              <p className="mt-3 text-base sm:text-lg text-slate-500 dark:text-slate-400">
+                From finding your match to your first day — transparent, fast, and respectful of your time.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+              {/* Connector line (desktop only) */}
+              <div className="hidden md:block absolute top-14 left-1/4 right-1/4 h-0.5 bg-gradient-to-r from-indigo-200 via-violet-300 to-indigo-200 dark:from-indigo-900 dark:via-violet-800 dark:to-indigo-900 z-0" />
+
+              {[
+                {
+                  step: "01",
+                  icon: Search,
+                  title: "Discover Your Match",
+                  description: "Explore curated full-time and part-time openings. Filter by location, remote flexibility, tech stack, and salary expectations.",
+                  badge: "Smart Discovery",
+                  color: "from-indigo-500 to-indigo-600",
+                },
+                {
+                  step: "02",
+                  icon: Send,
+                  title: "1-Click Direct Application",
+                  description: "Apply in minutes with your resume or LinkedIn. No endless account forms or repetitive question fields required.",
+                  badge: "Instant Review",
+                  color: "from-violet-500 to-violet-600",
+                  elevated: true,
+                },
+                {
+                  step: "03",
+                  icon: Sparkles,
+                  title: "Interview & Land the Role",
+                  description: "Connect directly with company hiring managers, receive quick constructive feedback, and secure competitive offers.",
+                  badge: "Direct Contact",
+                  color: "from-cyan-500 to-blue-600",
+                },
+              ].map(({ step, icon: StepIcon, title, description, badge, color, elevated }) => (
+                <div
+                  key={step}
+                  className={`relative z-10 bg-white dark:bg-slate-950 p-8 rounded-3xl border border-slate-200/90 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all duration-300 group ${
+                    elevated
+                      ? "md:-translate-y-3 shadow-md shadow-indigo-500/5 ring-2 ring-indigo-500/20 dark:ring-indigo-500/30"
+                      : ""
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-6">
+                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${color} flex items-center justify-center text-white shadow-lg shadow-indigo-500/20 group-hover:scale-110 transition-transform duration-300`}>
+                      <StepIcon className="w-7 h-7" />
+                    </div>
+                    <span className="text-3xl font-black text-slate-200 dark:text-slate-800 select-none">
+                      {step}
+                    </span>
+                  </div>
+
+                  <span className="inline-block text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 mb-3">
+                    {badge}
+                  </span>
+
+                  <h3 className="text-xl font-bold mb-2 text-slate-900 dark:text-white">
+                    {title}
+                  </h3>
+                  <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+                    {description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </section>
 
